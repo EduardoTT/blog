@@ -8,23 +8,12 @@
     <h1>{{ page.title }}</h1>
     <p class="meta">{{ page.date }}</p>
 
-    {% with categories=page.categories.all %}
-        {% if categories %}
-            <h3>Categories:</h3>
-            <ul>
-                {% for category in categories %}
-                <li style="display: inline">
-                    {% image category.icon fill-32x32 style="vertical-align: middle" %}
-                    {{ category.name }}
-                </li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
 
-    <div class="intro">{{ page.intro }}</div>
+    <section class="post__intro">{{ page.intro }}</section>
 
-    {% include_block page.body %}
+    <section class="post__content">
+        {% include_block page.body %}
+    </section>
     
     {% comment %} {% for item in page.gallery_images.all %}
         <div>
@@ -33,17 +22,33 @@
         </div>
     {% endfor %} {% endcomment %}
 
-    {% with tags=page.tags.all %}
-        {% if tags %}
-            <div class="tags">
-                <h3>Tags</h3>
-                {% for tag in tags %}
-                    <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
+    {% with categories=page.categories.all %}
+        {% if categories %}
+        <section class="post__categories">
+            <h2>Categories:</h2>
+            <ul>
+                {% for category in categories %}
+                <li style="display: inline">
+                    {% image category.icon fill-32x32 style="vertical-align: middle" %}
+                    {{ category.name }}
+                </li>
                 {% endfor %}
-            </div>
+            </ul>
+        </section>
         {% endif %}
     {% endwith %}
 
-    <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
+    {% with tags=page.tags.all %}
+        {% if tags %}
+            <section class="post__tags">
+                <h2>Tags</h2>
+                {% for tag in tags %}
+                    <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
+                {% endfor %}
+            </section>
+        {% endif %}
+    {% endwith %}
+
+    <p class="post__back"><a href="{{ page.get_parent.url }}">Return to blog</a></p>
 
 {% endblock %}

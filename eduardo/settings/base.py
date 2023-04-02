@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "home",
     "search",
     "blog",
+    "wagtailcodeblock",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
@@ -167,3 +168,7 @@ WAGTAILSEARCH_BACKENDS = {
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "http://example.com"
+
+# wagtailcodeblock
+WAGTAIL_CODE_BLOCK_LINE_NUMBERS = False
+WAGTAIL_CODE_BLOCK_THEME = "okaidia"

@@ -1,6 +1,8 @@
 from django.db import models
 from django import forms
 
+from wagtailcodeblock.blocks import CodeBlock
+
 from wagtail.models import Page, Orderable
 from wagtail.fields import RichTextField, StreamField
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
@@ -57,11 +59,11 @@ class BlogPage(Page):
                         "link",
                         "document-link",
                         "strikethrough",
-                        "code",
                         "blockquote",
                     ]
                 ),
             ),
+            ("code", CodeBlock(label="code", default_language="python")),
             ("image", ImageChooserBlock()),
             ("embed", EmbedBlock()),
         ],
