@@ -1,23 +1,11 @@
-{% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% extends "blog/base_blog_index.html" %}
 
 {% block content %}
 
-    {% if request.GET.tag %}
-        <h4>Showing pages tagged "{{ request.GET.tag }}"</h4>
-    {% endif %}
+{% if request.GET.tag %}
+    <h1>Tag: {{ request.GET.tag }}</h1>
+{% endif %}
 
-    {% for blogpage in blogpages %}
-        <p>
-            <strong><a href="{% pageurl blogpage %}">{{ blogpage.title }}</a></strong><br />
-            <small>Revised: {{ blogpage.latest_revision_created_at }}</small><br />
-            {% if blogpage.author %}
-                <p>By {{ blogpage.author.profile }}</p>
-            {% endif %}
-        </p>
-    
-    {% empty %}
-        No pages found with that tag
-    {% endfor %}
+{{ block.super }}
 
 {% endblock %}

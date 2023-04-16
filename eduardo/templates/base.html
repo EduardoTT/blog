@@ -34,6 +34,13 @@
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
 
+        {% block header %}
+            <div class="site_header">
+            <h1><a href="/">Eduardo Tolmasquim</a></h1>
+            <hr>
+            </div>
+        {% endblock %}
+
         {% block content %}{% endblock %}
 
         {# Global javascript #}

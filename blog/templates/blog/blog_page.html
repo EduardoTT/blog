@@ -22,7 +22,7 @@
         </div>
     {% endfor %} {% endcomment %}
 
-    {% with categories=page.categories.all %}
+    {% comment %} {% with categories=page.categories.all %}
         {% if categories %}
         <section class="post__categories">
             <h2>Categories:</h2>
@@ -36,19 +36,17 @@
             </ul>
         </section>
         {% endif %}
-    {% endwith %}
+    {% endwith %} {% endcomment %}
 
     {% with tags=page.tags.all %}
         {% if tags %}
             <section class="post__tags">
                 <h2>Tags</h2>
                 {% for tag in tags %}
-                    <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
+                    <a href="{% slugurl 'tags' %}?tag={{ tag }}">{{ tag }}</a>
                 {% endfor %}
             </section>
         {% endif %}
     {% endwith %}
-
-    <p class="post__back"><a href="{{ page.get_parent.url }}">Return to blog</a></p>
 
 {% endblock %}

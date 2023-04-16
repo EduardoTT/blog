@@ -15,7 +15,7 @@ from wagtail.embeds.blocks import EmbedBlock
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
 
-from taggit.models import TaggedItemBase
+from taggit.models import TaggedItemBase, Tag
 
 
 class BlogIndexPage(Page):
@@ -26,8 +26,15 @@ class BlogIndexPage(Page):
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
         context = super().get_context(request)
-        blogpages = self.get_children().live().order_by("-first_published_at")
+        blogpages = (
+            self.get_children()
+            .filter(blogpage__isnull=False)
+            .live()
+            .order_by("-first_published_at")
+        )
+        tags = Tag.objects.all()
         context["blogpages"] = blogpages
+        context["tags"] = tags
         return context
 
 

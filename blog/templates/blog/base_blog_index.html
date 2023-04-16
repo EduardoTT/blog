@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+<section class="index_page__content">
+{% for post in blogpages %}
+    <h2 class="index_page__page_title"><a href="{% pageurl post %}">{{ post.title }}</a></h2>
+    <p>{{ post.specific.date }}</p>
+    <p>{{ post.specific.intro }}</p>
+{% empty %}
+    No pages found
+{% endfor %}
+</section>
+{% endblock %}
